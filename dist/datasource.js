@@ -62,6 +62,15 @@ var GenericDatasource = exports.GenericDatasource = function () {
         };
       });
 
+      this.templateSrv.getVariables().forEach(function (variable) {
+        if (!_lodash2.default.isUndefined(variable.current)) {
+          variables[variable.name] = {
+            text: variable.current.text,
+            value: variable.current.value
+          };
+        }
+      });
+
       options.scopedVars = _extends({}, variables, options.scopedVars);
 
       return this.doRequest({

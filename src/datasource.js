@@ -40,6 +40,15 @@ export class GenericDatasource {
       };
     });
 
+    this.templateSrv.getVariables().forEach(variable => {
+      if (!_.isUndefined(variable.current)) {
+        variables[variable.name] = {
+          text: variable.current.text,
+          value: variable.current.value
+        };
+      }
+    });
+
     options.scopedVars = {...variables, ...options.scopedVars};
 
     return this.doRequest({
